@@ -4,7 +4,7 @@
 #include "ll_estudiantes.h"
 
 // Function to create a new node
-struct NodeEstudiante* createNode(const char* nombre, int edad, int legajo) {
+struct NodeEstudiante* createNode(char* nombre, int edad, int legajo) {
     struct NodeEstudiante* newNode = (struct NodeEstudiante*)malloc(sizeof(struct NodeEstudiante));
     strcpy(newNode->nombre, nombre);
     newNode->edad = edad;
@@ -15,7 +15,7 @@ struct NodeEstudiante* createNode(const char* nombre, int edad, int legajo) {
 }
 
 // Function to add a node at the end of the list
-void addAtEnd(struct NodeEstudiante** head, const char* nombre, int edad, int legajo) {
+void addAtEnd(struct NodeEstudiante** head, char* nombre, int edad, int legajo) {
     struct NodeEstudiante* newNode = createNode(nombre, edad, legajo);
     if (*head == NULL) {
         *head = newNode;
@@ -66,7 +66,7 @@ void removeNodeByLegajo(struct NodeEstudiante** head, int legajo) {
     free(temp); // Free memory
 }
 
-void removeNodeByName(struct NodeEstudiante** head, const char* nombre) {
+void removeNodeByName(struct NodeEstudiante** head, char* nombre) {
     struct NodeEstudiante* temp = *head;
     struct NodeEstudiante* prev = NULL;
 

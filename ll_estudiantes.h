@@ -11,10 +11,10 @@ struct NodeEstudiante {
 };
 
 // Function declarations
-struct NodeEstudiante* createNode(const char* nombre, int edad, int legajo);
-void addAtEnd(struct NodeEstudiante** head, const char* nombre, int edad, int legajo);
+struct NodeEstudiante* createNode(char* nombre, int edad, int legajo);
+void addAtEnd(struct NodeEstudiante** head, char* nombre, int edad, int legajo);
 void displayList(struct NodeEstudiante* head);
 void removeNodeByLegajo(struct NodeEstudiante** head, int legajo);
-void removeNodeByName(struct NodeEstudiante** head, const char* nombre);
+void removeNodeByName(struct NodeEstudiante** head, char* nombre);
 
 #endif 

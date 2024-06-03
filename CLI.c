@@ -56,21 +56,23 @@ char* getString() {
 // En manu agregas el puntero al link list de materias y pones las opciones para modificar materias.
 // int menuCLI(struct NodeEstudiante* headEst, struct NodeMaterias* headMat){
 int menuCLI(struct NodeEstudiante* headEst){
+    system("cls");
     int state = 1;
     printf("Menu Principal \n");
     printf("\n");
     printf("1) Agregar estudiante \n");
     printf("2) Modificar estudiante \n");
     printf("3) Eliminar estudiante \n");
-    printf("4) Lisar estudiantes \n");
+    printf("4) Listar estudiantes \n");
     printf("5) Buscar estudiante por nombre \n");
-    printf("6) Buscar estutiante por edad \n");
+    printf("6) Buscar estudiante por edad \n");
     printf("\n");
     printf("7) Salir \n");
     
     int option = getNumber();
     
     if (option == 1){
+        system("cls");
         printf("Ingrese el nombre del alumno: \n");
         char *nombre = getString();
         printf("Ingrese la edad del alumno: \n");
@@ -81,13 +83,22 @@ int menuCLI(struct NodeEstudiante* headEst){
     }
     
     if (option == 3){
+        system("cls");
         printf("Ingrese el nombre del alumno a borrar: \n");
         char *nombre = getString();
         removeNodeByName(&headEst, nombre);
     }
     
     if (option == 4){
+        system("cls");
         displayList(headEst);
+        printf("\n");
+        printf("si desea volver al menu eliga 1 si desea salir eliga 2\n");
+        int opcion = getNumber();
+        if (opcion==2){
+            state=0;
+        }
+        //system("pause");
     }
 
     if (option == 7){

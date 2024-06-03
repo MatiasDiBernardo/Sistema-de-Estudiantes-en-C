@@ -36,7 +36,7 @@ int main() {
     // }
 
     struct NodeEstudiante* headEst = NULL;
-    addAtEnd(&headEst, "Matías", 24, 55155);
+    addAtEnd(&headEst, "Matias", 24, 55155);
     int state = 1;
     while (state == 1){
         state = menuCLI(headEst);

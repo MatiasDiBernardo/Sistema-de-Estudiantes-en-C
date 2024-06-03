@@ -31,11 +31,15 @@ void addAtEnd(struct NodeEstudiante** head, char* nombre, int edad, int legajo) 
 // Function to display the linked list
 void displayList(struct NodeEstudiante* head) {
     struct NodeEstudiante* temp = head;
+    if(temp==NULL){
+        printf("No hay alumnos en la lista\n");
+    }else{
     while (temp != NULL) {
         printf("Nombre: %s | Edad: %d |  Legajo: %d \n", temp->nombre, temp->edad, temp->legajo);
         temp = temp->next;
-    }
-    printf("NULL\n");
+    }}
+
+   // printf("NULL\n");
 }
 
 // Function to remove a node with a specific value from the list

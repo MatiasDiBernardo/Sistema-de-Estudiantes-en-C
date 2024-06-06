@@ -52,6 +52,48 @@ char* getString() {
     
     return str;
 }
+void buscarPorNombre(struct NodeEstudiante** head, char* nombre){
+    struct NodeEstudiante* temp = *head;
+    
+    // Itera sobre la lista y avanza hasta encontrar el nombre
+    while (temp != NULL && strcmp(temp->nombre, nombre) != 0) {
+        temp = temp->next;
+    }
+    
+    if (temp==NULL){
+        printf("No se encontro el alumno solicitado.\n");
+    }else{
+        printf("El almuno solicitado es: ");
+        printf("Nombre: %s | Edad: %d |  Legajo: %d \n", temp->nombre, temp->edad, temp->legajo);
+    }
+
+}
+
+void buscarPorEdad(struct NodeEstudiante** head, int edadMin, int edadMax){
+    struct NodeEstudiante* temp = *head;
+    struct NodeEstudiante* edadBien = NULL;
+
+    // Itera sobre la lista y agrega a la otra lista si cumple la condición
+    while (temp != NULL) {
+        if ((temp->edad >=  edadMin) && (temp->edad <= edadMax)){
+            // Si no hay ningún elemento en la lista de edades lo inicializo
+            if (edadBien == NULL){
+                edadBien = temp;
+            }else{
+                edadBien->next = temp;
+                edadBien = edadBien->next;
+            }
+        }
+        temp = temp->next;
+    }
+    
+    if (edadBien == NULL){
+        printf("Ningún estudiante cumple con el rango de edad específicado.\n");
+    }else{
+        displayList(edadBien);
+    }
+    
+}
 
 // En manu agregas el puntero al link list de materias y pones las opciones para modificar materias.
 // int menuCLI(struct NodeEstudiante* headEst, struct NodeMaterias* headMat){
@@ -99,6 +141,20 @@ int menuCLI(struct NodeEstudiante* headEst){
             state=0;
         }
         //system("pause");
+    }
+    
+    if (option == 5){
+        printf("Ingrese el nombre del alumno a buscar: \n");
+        char *nombre = getString();
+        buscarPorNombre(&headEst, nombre);
+    }
+
+    if (option == 6){
+        printf("Ingrese la edad mínima: \n");
+        int edadMin = getNumber();
+        printf("Ingrese la edad maxima: \n");
+        int edadMax = getNumber();
+        buscarPorEdad(&headEst, edadMin, edadMax);
     }
 
     if (option == 7){

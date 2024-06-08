@@ -12,39 +12,38 @@ struct CLI_Interface* createCLI(struct NodeEstudiante* headEst, struct NodeMater
     return newCLI;
 }
 
+// Obtener un número del usuario
 int getNumber(){
     int number;
     scanf("%d", &number);
     return number;
 }
 
+// Obtener un string del usuario
 char* getString() {
-    // Clear buffer
+    // Limpia el buffer (sin esta línea tenía un bug con los caracteres en blanco)
     int c;
     while ((c = getchar()) != '\n' && c != EOF) {
-        // Discard characters
+        // Acá limpia el buffer  
     }
-    // Define a buffer size
     size_t bufferSize = 256;
-    // Allocate memory for the input string
+    // Se designa memoria para el input en formato string
     char* str = (char*)malloc(bufferSize * sizeof(char));
     if (str == NULL) {
-        // Handle memory allocation error
-        printf("Memory allocation error\n");
+        printf("Error en la asignación de memoria del programa.\n");
         return NULL;
     }
     
-    // Prompt the user for input
     printf("Enter a string: ");
     
-    // Read the input from the user and store it in the allocated memory
+    // Lee el input y lo guadra en el espacio de memoria específicado 
     if (fgets(str, bufferSize, stdin) == NULL) {
-        // Handle input error
+        // Detección de errores 
         free(str);
         return NULL;
     }
     
-    // Remove newline character if present
+    // Remueve saltos de línea en el input 
     size_t length = strlen(str);
     if (length > 0 && str[length - 1] == '\n') {
         str[length - 1] = '\0';
@@ -65,6 +64,25 @@ void buscarPorNombre(struct NodeEstudiante** head, char* nombre){
     }else{
         printf("El almuno solicitado es: ");
         printf("Nombre: %s | Edad: %d |  Legajo: %d \n", temp->nombre, temp->edad, temp->legajo);
+    }
+
+}
+
+struct NodeEstudiante* buscarPorNombreModificar(struct NodeEstudiante** head, char* nombre){
+    struct NodeEstudiante* temp = *head;
+    
+    // Itera sobre la lista y avanza hasta encontrar el nombre
+    while (temp != NULL && strcmp(temp->nombre, nombre) != 0) {
+        temp = temp->next;
+    }
+    
+    if (temp==NULL){
+        printf("No se encontro el alumno solicitado.\n");
+        return temp;
+    }else{
+        printf("El almuno a modificar es: ");
+        printf("Nombre: %s | Edad: %d |  Legajo: %d \n", temp->nombre, temp->edad, temp->legajo);
+        return temp;
     }
 
 }
@@ -122,6 +140,38 @@ int menuCLI(struct NodeEstudiante* headEst){
         printf("Ingrese el legajo del alumno: \n");
         int legajo = getNumber();
         addAtEnd(&headEst, nombre, edad, legajo);
+    }
+    
+    if (option == 2){
+        struct NodeEstudiante* alumnoAModificar = NULL;
+        printf("Ingrese el nombre del alumno a modificar: \n");
+        char *nombre = getString();
+        alumnoAModificar = buscarPorNombreModificar(&headEst, nombre);
+        if (alumnoAModificar != NULL){
+            printf("Ingrese el campo a modificar: \n");
+            printf("1) Nombre \n");
+            printf("2) Edad \n");
+            printf("3) Legajo \n");
+            int optionMod = getNumber();
+
+            if (optionMod == 1){
+                printf("Ingrese el nuevo nombre: \n");
+                char *nuevoNombre = getString();
+                strcpy(alumnoAModificar->nombre, nuevoNombre);
+            }
+
+            if (optionMod == 2){
+                printf("Ingrese la edad actualizada: \n");
+                int edadNueva = getNumber();
+                alumnoAModificar->edad = edadNueva;
+            }
+
+            if (optionMod == 3){
+                printf("Ingrese el legajo actualizado: \n");
+                int legajoNuevo = getNumber();
+                alumnoAModificar->legajo = legajoNuevo;
+            }
+        }
     }
     
     if (option == 3){

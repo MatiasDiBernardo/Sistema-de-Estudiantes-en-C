@@ -112,6 +112,10 @@ void buscarPorEdad(struct NodeEstudiante** head, int edadMin, int edadMax){
     }
     
 }
+void volverAlMenu(){
+    printf("si desea volver al menu eliga cualquier numero\n");
+        int opcion = getNumber();
+}
 
 // En manu agregas el puntero al link list de materias y pones las opciones para modificar materias.
 // int menuCLI(struct NodeEstudiante* headEst, struct NodeMaterias* headMat){
@@ -143,11 +147,13 @@ int menuCLI(struct NodeEstudiante* headEst){
     }
     
     if (option == 2){
+        system("cls");
         struct NodeEstudiante* alumnoAModificar = NULL;
         printf("Ingrese el nombre del alumno a modificar: \n");
         char *nombre = getString();
         alumnoAModificar = buscarPorNombreModificar(&headEst, nombre);
         if (alumnoAModificar != NULL){
+            system("cls");
             printf("Ingrese el campo a modificar: \n");
             printf("1) Nombre \n");
             printf("2) Edad \n");
@@ -155,18 +161,21 @@ int menuCLI(struct NodeEstudiante* headEst){
             int optionMod = getNumber();
 
             if (optionMod == 1){
+                system("cls");
                 printf("Ingrese el nuevo nombre: \n");
                 char *nuevoNombre = getString();
                 strcpy(alumnoAModificar->nombre, nuevoNombre);
             }
 
             if (optionMod == 2){
+                system("cls");
                 printf("Ingrese la edad actualizada: \n");
                 int edadNueva = getNumber();
                 alumnoAModificar->edad = edadNueva;
             }
 
             if (optionMod == 3){
+                system("cls");
                 printf("Ingrese el legajo actualizado: \n");
                 int legajoNuevo = getNumber();
                 alumnoAModificar->legajo = legajoNuevo;
@@ -185,26 +194,26 @@ int menuCLI(struct NodeEstudiante* headEst){
         system("cls");
         displayList(headEst);
         printf("\n");
-        printf("si desea volver al menu eliga 1 si desea salir eliga 2\n");
-        int opcion = getNumber();
-        if (opcion==2){
-            state=0;
-        }
+        volverAlMenu();
         //system("pause");
     }
     
     if (option == 5){
+        system("cls");
         printf("Ingrese el nombre del alumno a buscar: \n");
         char *nombre = getString();
         buscarPorNombre(&headEst, nombre);
+        volverAlMenu();
     }
 
     if (option == 6){
+        system("cls");
         printf("Ingrese la edad mínima: \n");
         int edadMin = getNumber();
         printf("Ingrese la edad maxima: \n");
         int edadMax = getNumber();
         buscarPorEdad(&headEst, edadMin, edadMax);
+        volverAlMenu();
     }
 
     if (option == 7){

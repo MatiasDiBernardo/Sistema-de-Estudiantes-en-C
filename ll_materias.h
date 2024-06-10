@@ -15,5 +15,6 @@ void agregarMateriaAlFinal(struct NodeMateria** head, char* nombreMateria, int i
 struct NodeMateria* creaListaBaseDeMaterias();
 struct NodeMateria* creaMateriasSegunAlumno(char *nombreMaterias[], int notaMaterias[], int cantidadCursadas);
 void displayMaterias(struct NodeMateria* head);
+void displayMateriasCursadas(struct NodeMateria* head);
 
 #endif 

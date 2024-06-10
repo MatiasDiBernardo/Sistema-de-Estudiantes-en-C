@@ -5,20 +5,20 @@
 #include "ll_materias.h"
 
 // Funcion para crear un nodo del struct estudiante 
-struct NodeEstudiante* createNode(char* nombre, int edad, int legajo, char *nombreMaterias[], int notaMaterias[], int cantidadCursadas) {
+struct NodeEstudiante* createNode(char* nombre, int edad, int legajo, struct NodeMateria* listaMaterias) {
     struct NodeEstudiante* newNode = (struct NodeEstudiante*)malloc(sizeof(struct NodeEstudiante));
-    struct NodeMateria* newNodeMaterias = creaMateriasSegunAlumno(nombreMaterias, notaMaterias, cantidadCursadas);
+    // struct NodeMateria* newNodeMaterias = creaMateriasSegunAlumno(nombreMaterias, notaMaterias, cantidadCursadas);
     strcpy(newNode->nombre, nombre);
     newNode->edad = edad;
     newNode->legajo = legajo;
-    newNode->materias = newNodeMaterias;
+    newNode->materias = listaMaterias;
     newNode->next = NULL;
     return newNode;
 }
 
 // Funcion para agregar un nodo al final de la linked list de estudiantes
-void addAtEnd(struct NodeEstudiante** head, char* nombre, int edad, int legajo, char *nombreMaterias[], int notaMaterias[], int cantidadCursadas) {
-    struct NodeEstudiante* newNode = createNode(nombre, edad, legajo, nombreMaterias, notaMaterias, cantidadCursadas);
+void addAtEnd(struct NodeEstudiante** head, char* nombre, int edad, int legajo, struct NodeMateria* listaMaterias) {
+    struct NodeEstudiante* newNode = createNode(nombre, edad, legajo, listaMaterias);
     if (*head == NULL) {
         *head = newNode;
         return;
@@ -39,8 +39,9 @@ void displayList(struct NodeEstudiante* head) {
     }else{
     while (temp != NULL) {
         printf("Nombre: %s | Edad: %d |  Legajo: %d \n", temp->nombre, temp->edad, temp->legajo);
-        printf("Estado de materias del alumno: ");
-        displayMaterias(temp->materias);
+        printf("Estado de materias del alumno: \n");
+        displayMateriasCursadas(temp->materias);
+        printf("\n");
         temp = temp->next;
     }}
 }

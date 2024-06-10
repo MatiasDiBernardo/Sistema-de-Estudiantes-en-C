@@ -5,7 +5,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c11
 
 # Source files
-SRCS = main.c ll_estudiantes.c CLI.c
+SRCS = main.c ll_estudiantes.c CLI.c Materias.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)

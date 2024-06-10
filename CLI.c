@@ -3,6 +3,7 @@
 #include <string.h>
 #include "CLI.h"
 #include "ll_estudiantes.h"
+#include "Materias.c"
 
 // Funcion para crear CLI 
 struct CLI_Interface* createCLI(struct NodeEstudiante* headEst, struct NodeMaterias* headMat) {
@@ -128,10 +129,11 @@ int menuCLI(struct NodeEstudiante* headEst){
     printf("2) Modificar estudiante \n");
     printf("3) Eliminar estudiante \n");
     printf("4) Listar estudiantes \n");
-    printf("5) Buscar estudiante por nombre \n");
-    printf("6) Buscar estudiante por edad \n");
+    printf("5) Asignar materia\n");
+    printf("6) Buscar estudiante por nombre \n");
+    printf("7) Buscar estudiante por edad \n");
     printf("\n");
-    printf("7) Salir \n");
+    printf("8) Salir \n");
     
     int option = getNumber();
     
@@ -197,8 +199,24 @@ int menuCLI(struct NodeEstudiante* headEst){
         volverAlMenu();
         //system("pause");
     }
+
+    if(option== 5){
+        char nombre[20];
+        char nombreMateria[20];
+        system("cls");
+        struct NodeEstudiante* estudiante = NULL;
+        printf("Inserte nombre del estudiante\n");
+        scanf("%s", nombre);
+        estudiante = buscarPorNombreModificar(&headEst,nombre);
+        if(estudiante != NULL) {
+                    printf("Inserte nombre de la materia\n",nombreMateria);
+                    scanf("%s",nombreMateria);
+                    asignarMateria(estudiante,nombreMateria);
+         }
+                   // printf(estudiante->Materias);
+    }
     
-    if (option == 5){
+    if (option == 6){
         system("cls");
         printf("Ingrese el nombre del alumno a buscar: \n");
         char *nombre = getString();
@@ -206,7 +224,7 @@ int menuCLI(struct NodeEstudiante* headEst){
         volverAlMenu();
     }
 
-    if (option == 6){
+    if (option == 7){
         system("cls");
         printf("Ingrese la edad mínima: \n");
         int edadMin = getNumber();
@@ -216,7 +234,7 @@ int menuCLI(struct NodeEstudiante* headEst){
         volverAlMenu();
     }
 
-    if (option == 7){
+    if (option == 8){
         state = 0;
     }
     

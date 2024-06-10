@@ -8,6 +8,7 @@ struct NodeEstudiante {
     int legajo;
     struct NodeMaterias* materias;
     struct NodeEstudiante* next;
+    struct Materia *listaMaterias;
 };
 
 // Function declarations

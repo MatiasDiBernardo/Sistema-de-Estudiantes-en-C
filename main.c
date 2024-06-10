@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "ll_estudiantes.h"
 #include "CLI.h"
+#include "Materias.c"
+
 
 struct NodeEstudiante* inicializacionEstudiantes(){
     struct NodeEstudiante* headEst = NULL;

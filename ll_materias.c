@@ -104,9 +104,10 @@ void displayMaterias(struct NodeMateria* head){
         printf("No hay materias para mostrar\n");
     }else{
     while (temp != NULL) {
-        printf("Nombre materia: %s | Estado Materia: %s |  Nota Materia: %d \n", temp->nombreMateria, numeroAEstado(temp->estadoMateria), temp->notaMateria);
+        printf("Nombre materia: %s \n", temp->nombreMateria);
         temp = temp->next;
-    }}
+        }
+    }
 }
 
 // Funcion que muestra solo las materias que se esta cursando 

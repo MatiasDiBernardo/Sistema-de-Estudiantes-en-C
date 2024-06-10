@@ -131,11 +131,13 @@ int menuCLI(struct NodeEstudiante* headEst){
     printf("2) Modificar estudiante \n");
     printf("3) Eliminar estudiante \n");
     printf("4) Listar estudiantes \n");
-    printf("5) Asignar materia\n");
-    printf("6) Buscar estudiante por nombre \n");
-    printf("7) Buscar estudiante por edad \n");
+    printf("5) Buscar estudiante por nombre \n");
+    printf("6) Buscar estudiante por edad \n");
+    printf("7) Listar Materias\n");
+    printf("8) Anotarse en materia\n");
+    printf("9) Rendir materia\n");
     printf("\n");
-    printf("8) Salir \n");
+    printf("0) Salir \n");
     
     int option = getNumber();
     
@@ -207,13 +209,8 @@ int menuCLI(struct NodeEstudiante* headEst){
         //system("pause");
     }
 
-    if (option == 5){
-        printf("Tendría que preguntar por el estudiante y después preguntar por las materias a agregar. \n");
-        printf("Yo haría una lista preguntando un número y mostrando las materias disponibles.");
-    }
-
-    
-    if(option == 6){
+    // Busca estudiante por nombre
+    if(option == 5){
         system("cls");
         printf("Ingrese el nombre del alumno a buscar: \n");
         char *nombre = getString();
@@ -221,7 +218,8 @@ int menuCLI(struct NodeEstudiante* headEst){
         volverAlMenu();
     }
 
-    if(option == 7){
+    // Busca estudiante por edad
+    if(option == 6){
         system("cls");
         printf("Ingrese la edad mínima: \n");
         int edadMin = getNumber();
@@ -231,7 +229,29 @@ int menuCLI(struct NodeEstudiante* headEst){
         volverAlMenu();
     }
 
+    // Listar materias
+    if (option == 7){
+        struct NodeMateria* materiasBase = creaListaBaseDeMaterias();
+        displayMaterias(materiasBase);
+    }
+
+    // Anotarse en materia
     if (option == 8){
+        printf("Tendría que preguntar por el estudiante y después preguntar por las materias a agregar. \n");
+        printf("Ingrese el nombre del alumno que quiere anotarse a la materia: ");
+        // Guardadr el string
+        printf("Ingrese el nombre de la materia");
+        // Guardas el string
+        // Hacers la lógica para que aparezca como cursando (nota de materia == 0)
+
+    }
+
+    // Rendir materia 
+    if (option == 9){
+        printf("Lo mismo que arriba. Tendría que preguntar por el estudiante y después preguntar por la materia a rendir. \n");
+    }
+
+    if (option == 0){
         state = 0;
     }
     

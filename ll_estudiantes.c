@@ -2,21 +2,23 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ll_estudiantes.h"
+#include "ll_materias.h"
 
-// Function to create a new node
-struct NodeEstudiante* createNode(char* nombre, int edad, int legajo) {
+// Funcion para crear un nodo del struct estudiante 
+struct NodeEstudiante* createNode(char* nombre, int edad, int legajo, char *nombreMaterias[], int notaMaterias[], int cantidadCursadas) {
     struct NodeEstudiante* newNode = (struct NodeEstudiante*)malloc(sizeof(struct NodeEstudiante));
+    struct NodeMateria* newNodeMaterias = creaMateriasSegunAlumno(nombreMaterias, notaMaterias, cantidadCursadas);
     strcpy(newNode->nombre, nombre);
     newNode->edad = edad;
     newNode->legajo = legajo;
-    // Falta agregar el puntero a la ll de materias
+    newNode->materias = newNodeMaterias;
     newNode->next = NULL;
     return newNode;
 }
 
-// Function to add a node at the end of the list
-void addAtEnd(struct NodeEstudiante** head, char* nombre, int edad, int legajo) {
-    struct NodeEstudiante* newNode = createNode(nombre, edad, legajo);
+// Funcion para agregar un nodo al final de la linked list de estudiantes
+void addAtEnd(struct NodeEstudiante** head, char* nombre, int edad, int legajo, char *nombreMaterias[], int notaMaterias[], int cantidadCursadas) {
+    struct NodeEstudiante* newNode = createNode(nombre, edad, legajo, nombreMaterias, notaMaterias, cantidadCursadas);
     if (*head == NULL) {
         *head = newNode;
         return;
@@ -28,7 +30,8 @@ void addAtEnd(struct NodeEstudiante** head, char* nombre, int edad, int legajo) 
     temp->next = newNode;
 }
 
-// Function to display the linked list
+
+// Funcion para mostrar la linked list
 void displayList(struct NodeEstudiante* head) {
     struct NodeEstudiante* temp = head;
     if(temp==NULL){
@@ -36,10 +39,10 @@ void displayList(struct NodeEstudiante* head) {
     }else{
     while (temp != NULL) {
         printf("Nombre: %s | Edad: %d |  Legajo: %d \n", temp->nombre, temp->edad, temp->legajo);
+        printf("Estado de materias del alumno: ");
+        displayMaterias(temp->materias);
         temp = temp->next;
     }}
-
-   // printf("NULL\n");
 }
 
 // Function to remove a node with a specific value from the list
@@ -47,7 +50,6 @@ void removeNodeByLegajo(struct NodeEstudiante** head, int legajo) {
     struct NodeEstudiante* temp = *head;
     struct NodeEstudiante* prev = NULL;
 
-    // Ver que agregar para borrar por nombre
     // If the head node itself holds the value to be deleted
     if (temp != NULL && temp->legajo == legajo) {
         *head = temp->next; // Change head

@@ -3,7 +3,7 @@
 #include <string.h>
 #include "CLI.h"
 #include "ll_estudiantes.h"
-#include "Materias.c"
+#include "ll_materias.h"
 
 // Funcion para crear CLI 
 struct CLI_Interface* createCLI(struct NodeEstudiante* headEst, struct NodeMaterias* headMat) {
@@ -115,13 +115,16 @@ void buscarPorEdad(struct NodeEstudiante** head, int edadMin, int edadMax){
 }
 void volverAlMenu(){
     printf("si desea volver al menu eliga cualquier numero\n");
-        int opcion = getNumber();
+    int opcion = getNumber();
+    if (opcion == 2){
+        printf("Algo para que no se queje el compilador, hay que rehacer esta lógica.");
+        
+    }
 }
 
 // En manu agregas el puntero al link list de materias y pones las opciones para modificar materias.
 // int menuCLI(struct NodeEstudiante* headEst, struct NodeMaterias* headMat){
 int menuCLI(struct NodeEstudiante* headEst){
-    system("cls");
     int state = 1;
     printf("Menu Principal \n");
     printf("\n");
@@ -145,7 +148,11 @@ int menuCLI(struct NodeEstudiante* headEst){
         int edad = getNumber();
         printf("Ingrese el legajo del alumno: \n");
         int legajo = getNumber();
-        addAtEnd(&headEst, nombre, edad, legajo);
+        printf("Ingrese las materias a agregar y las notas: \n");
+        printf("Falta implementar");
+        char *materiasFacil[] = {"Física I", "Análisis Matemátcio I", "Historia"};
+        int notasFacil[] = {6, 2, 9};
+        addAtEnd(&headEst, nombre, edad, legajo, materiasFacil, notasFacil, 3);
     }
     
     if (option == 2){
@@ -200,23 +207,27 @@ int menuCLI(struct NodeEstudiante* headEst){
         //system("pause");
     }
 
-    if(option== 5){
-        char nombre[20];
-        char nombreMateria[20];
-        system("cls");
-        struct NodeEstudiante* estudiante = NULL;
-        printf("Inserte nombre del estudiante\n");
-        scanf("%s", nombre);
-        estudiante = buscarPorNombreModificar(&headEst,nombre);
-        if(estudiante != NULL) {
-                    printf("Inserte nombre de la materia\n",nombreMateria);
-                    scanf("%s",nombreMateria);
-                    asignarMateria(estudiante,nombreMateria);
-         }
-                   // printf(estudiante->Materias);
+    if (option == 5){
+        printf("Tendría que preguntar por el estudiante y después preguntar por las materias a agregar. \n");
     }
+
+    // if(option== 5){
+    //     char nombre[20];
+    //     char nombreMateria[20];
+    //     system("cls");
+    //     struct NodeEstudiante* estudiante = NULL;
+    //     printf("Inserte nombre del estudiante\n");
+    //     scanf("%s", nombre);
+    //     estudiante = buscarPorNombreModificar(&headEst,nombre);
+    //     if(estudiante != NULL) {
+    //                 printf("Inserte nombre de la materia\n",nombreMateria);
+    //                 scanf("%s",nombreMateria);
+    //                 asignarMateria(estudiante,nombreMateria);
+    //      }
+    //                // printf(estudiante->Materias);
+    // }
     
-    if (option == 6){
+    if(option == 6){
         system("cls");
         printf("Ingrese el nombre del alumno a buscar: \n");
         char *nombre = getString();
@@ -224,7 +235,7 @@ int menuCLI(struct NodeEstudiante* headEst){
         volverAlMenu();
     }
 
-    if (option == 7){
+    if(option == 7){
         system("cls");
         printf("Ingrese la edad mínima: \n");
         int edadMin = getNumber();

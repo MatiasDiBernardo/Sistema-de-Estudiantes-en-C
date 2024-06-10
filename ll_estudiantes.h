@@ -1,19 +1,18 @@
 #ifndef LL_ESTUDIANTES_H
 #define LL_ESTUDIANTES_H
 
-#// Define the node structure
+#// Define el node de estudiantes
 struct NodeEstudiante {
     char nombre[100];
     int edad;
     int legajo;
-    struct NodeMaterias* materias;
+    struct NodeMateria* materias;
     struct NodeEstudiante* next;
-    struct Materia *listaMaterias;
 };
 
 // Function declarations
-struct NodeEstudiante* createNode(char* nombre, int edad, int legajo);
-void addAtEnd(struct NodeEstudiante** head, char* nombre, int edad, int legajo);
+struct NodeEstudiante* createNode(char* nombre, int edad, int legajo, char *nombreMaterias[], int notaMaterias[], int cantidadCursadas);
+void addAtEnd(struct NodeEstudiante** head, char* nombre, int edad, int legajo, char *nombreMaterias[], int notaMaterias[], int cantidadCursadas);
 void displayList(struct NodeEstudiante* head);
 void removeNodeByLegajo(struct NodeEstudiante** head, int legajo);
 void removeNodeByName(struct NodeEstudiante** head, char* nombre);

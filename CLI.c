@@ -237,10 +237,18 @@ int menuCLI(struct NodeEstudiante* headEst){
 
     // Anotarse en materia
     if (option == 8){
+        system("cls");
+      
         printf("Tendría que preguntar por el estudiante y después preguntar por las materias a agregar. \n");
-        printf("Ingrese el nombre del alumno que quiere anotarse a la materia: ");
-        // Guardadr el string
-        printf("Ingrese el nombre de la materia");
+        printf("Ingrese el nombre del alumno que quiere anotarse a la materia: \n");
+         struct NodeEstudiante* alumno = NULL;
+         char *nombreAlumno = getString();
+           alumno=buscarPorNombreModificar(&headEst, nombreAlumno);
+         printf("Ingrese el nombre de la materia\n");
+          char *nombreMateria = getString();
+          struct NodeMateria* materia = alumno->materias;
+          agregarMateriaAlFinal(&materia,nombreMateria,1,0);
+
         // Guardas el string
         // Hacers la lógica para que aparezca como cursando (nota de materia == 0)
 
@@ -248,7 +256,20 @@ int menuCLI(struct NodeEstudiante* headEst){
 
     // Rendir materia 
     if (option == 9){
-        printf("Lo mismo que arriba. Tendría que preguntar por el estudiante y después preguntar por la materia a rendir. \n");
+        system("cls");
+        struct NodeEstudiante* alumno = NULL;
+         printf("Ingrese el nombre del alumno que quiere rendir la materia: \n");
+         char *nombreAlumno = getString();
+           alumno=buscarPorNombreModificar(&headEst, nombreAlumno);
+         printf("Ingrese el nombre de la materia\n");
+          char *nombreMateria = getString();
+          printf("Ingrese la nota del alumno\n");
+          int nota = getNumber();
+        char *nombreMateria = getString();
+        struct NodeMateria* materia = alumno->materias;
+        actualizaListaMaterias(&materia,nombreMateria,nota);
+        
+       // printf("Lo mismo que arriba. Tendría que preguntar por el estudiante y después preguntar por la materia a rendir. \n");
     }
 
     if (option == 0){

@@ -20,7 +20,7 @@ struct NodeEstudiante* inicializacionEstudiantes(){
     char *materias3[] = {"Algoritmos I"};
     int notas3[] = {6};
     struct NodeMateria* matEst3 = creaMateriasSegunAlumno(materias3, notas3, 1);
-    addAtEnd(&headEst, "Jerinimo Igoldi", 25, 54567, matEst3);
+    addAtEnd(&headEst, "Jeronimo Igoldi", 25, 54567, matEst3);
 
     char *materias4[] = {"Algebra I", "Historia"};
     int notas4[] = {8, 2};

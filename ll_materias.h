@@ -16,5 +16,6 @@ struct NodeMateria* creaListaBaseDeMaterias();
 struct NodeMateria* creaMateriasSegunAlumno(char *nombreMaterias[], int notaMaterias[], int cantidadCursadas);
 void displayMaterias(struct NodeMateria* head);
 void displayMateriasCursadas(struct NodeMateria* head);
+void actualizaListaMaterias(struct NodeMateria* head, char* nombreMateria, int notaMateria);
 
 #endif 

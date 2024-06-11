@@ -65,6 +65,7 @@ void buscarPorNombre(struct NodeEstudiante** head, char* nombre){
     }else{
         printf("El almuno solicitado es: ");
         printf("Nombre: %s | Edad: %d |  Legajo: %d \n", temp->nombre, temp->edad, temp->legajo);
+        displayMateriasCursadas(temp->materias);
     }
 
 }
@@ -94,7 +95,7 @@ void buscarPorEdad(struct NodeEstudiante** head, int edadMin, int edadMax){
 
     // Itera sobre la lista y agrega a la otra lista si cumple la condición
     while (temp != NULL) {
-        if ((temp->edad >=  edadMin) && (temp->edad <= edadMax)){
+        if ((temp->edad >= edadMin) && (temp->edad <= edadMax)){
             // Si no hay ningún elemento en la lista de edades lo inicializo
             if (edadBien == NULL){
                 edadBien = temp;
@@ -143,7 +144,7 @@ int menuCLI(struct NodeEstudiante* headEst){
     
     // Agregar estudiante
     if (option == 1){
-        system("cls");
+        system("clear");
         printf("Ingrese el nombre del alumno: \n");
         char *nombre = getString();
         printf("Ingrese la edad del alumno: \n");
@@ -156,13 +157,13 @@ int menuCLI(struct NodeEstudiante* headEst){
     
     // Modificar estudiante
     if (option == 2){
-        system("cls");
+        system("clear");
         struct NodeEstudiante* alumnoAModificar = NULL;
         printf("Ingrese el nombre del alumno a modificar: \n");
         char *nombre = getString();
         alumnoAModificar = buscarPorNombreModificar(&headEst, nombre);
         if (alumnoAModificar != NULL){
-            system("cls");
+            system("clear");
             printf("Ingrese el campo a modificar: \n");
             printf("1) Nombre \n");
             printf("2) Edad \n");
@@ -170,21 +171,21 @@ int menuCLI(struct NodeEstudiante* headEst){
             int optionMod = getNumber();
 
             if (optionMod == 1){
-                system("cls");
+                system("clear");
                 printf("Ingrese el nuevo nombre: \n");
                 char *nuevoNombre = getString();
                 strcpy(alumnoAModificar->nombre, nuevoNombre);
             }
 
             if (optionMod == 2){
-                system("cls");
+                system("clear");
                 printf("Ingrese la edad actualizada: \n");
                 int edadNueva = getNumber();
                 alumnoAModificar->edad = edadNueva;
             }
 
             if (optionMod == 3){
-                system("cls");
+                system("clear");
                 printf("Ingrese el legajo actualizado: \n");
                 int legajoNuevo = getNumber();
                 alumnoAModificar->legajo = legajoNuevo;
@@ -194,7 +195,7 @@ int menuCLI(struct NodeEstudiante* headEst){
     
     // Borrar estudiante
     if (option == 3){
-        system("cls");
+        system("clear");
         printf("Ingrese el nombre del alumno a borrar: \n");
         char *nombre = getString();
         removeNodeByName(&headEst, nombre);
@@ -202,7 +203,7 @@ int menuCLI(struct NodeEstudiante* headEst){
     
     // Listar estudiantes
     if (option == 4){
-        system("cls");
+        system("clear");
         displayList(headEst);
         printf("\n");
         volverAlMenu();
@@ -211,7 +212,7 @@ int menuCLI(struct NodeEstudiante* headEst){
 
     // Busca estudiante por nombre
     if(option == 5){
-        system("cls");
+        system("clear");
         printf("Ingrese el nombre del alumno a buscar: \n");
         char *nombre = getString();
         buscarPorNombre(&headEst, nombre);
@@ -220,7 +221,7 @@ int menuCLI(struct NodeEstudiante* headEst){
 
     // Busca estudiante por edad
     if(option == 6){
-        system("cls");
+        system("clear");
         printf("Ingrese la edad mínima: \n");
         int edadMin = getNumber();
         printf("Ingrese la edad maxima: \n");
@@ -233,43 +234,38 @@ int menuCLI(struct NodeEstudiante* headEst){
     if (option == 7){
         struct NodeMateria* materiasBase = creaListaBaseDeMaterias();
         displayMaterias(materiasBase);
+        volverAlMenu();
     }
 
     // Anotarse en materia
     if (option == 8){
-        system("cls");
+        system("clear");
       
-        printf("Tendría que preguntar por el estudiante y después preguntar por las materias a agregar. \n");
         printf("Ingrese el nombre del alumno que quiere anotarse a la materia: \n");
-         struct NodeEstudiante* alumno = NULL;
-         char *nombreAlumno = getString();
-           alumno=buscarPorNombreModificar(&headEst, nombreAlumno);
-         printf("Ingrese el nombre de la materia\n");
-          char *nombreMateria = getString();
-          struct NodeMateria* materia = alumno->materias;
-          agregarMateriaAlFinal(&materia,nombreMateria,1,0);
-
-        // Guardas el string
-        // Hacers la lógica para que aparezca como cursando (nota de materia == 0)
-
+        char *nombreAlumno = getString();
+        struct NodeEstudiante* alumno = NULL;
+        alumno = buscarPorNombreModificar(&headEst, nombreAlumno);
+        printf("Ingrese el nombre de la materia que se quiere anotar: \n");
+        char *nombreMateria = getString();
+        struct NodeMateria* materia = alumno->materias;
+        actualizaListaMaterias(materia, nombreMateria, 0);
+        volverAlMenu();
     }
 
     // Rendir materia 
     if (option == 9){
-        system("cls");
+        system("clear");
+        printf("Ingrese el nombre del alumno que quiere rendir la materia: \n");
+        char *nombreAlumno = getString();
         struct NodeEstudiante* alumno = NULL;
-         printf("Ingrese el nombre del alumno que quiere rendir la materia: \n");
-         char *nombreAlumno = getString();
-           alumno=buscarPorNombreModificar(&headEst, nombreAlumno);
-         printf("Ingrese el nombre de la materia\n");
-          char *nombreMateria = getString();
-          printf("Ingrese la nota del alumno\n");
-          int nota = getNumber();
+        alumno = buscarPorNombreModificar(&headEst, nombreAlumno);
+        printf("Ingrese el nombre de la materia a rendir: \n");
         char *nombreMateria = getString();
+        printf("Ingrese la nota del alumno\n");
+        int nota = getNumber();
         struct NodeMateria* materia = alumno->materias;
-        actualizaListaMaterias(&materia,nombreMateria,nota);
-        
-       // printf("Lo mismo que arriba. Tendría que preguntar por el estudiante y después preguntar por la materia a rendir. \n");
+        actualizaListaMaterias(materia,nombreMateria,nota);
+        volverAlMenu();
     }
 
     if (option == 0){

@@ -49,6 +49,7 @@ void actualizaListaMaterias(struct NodeMateria* head, char* nombreMateria, int n
     
     // Si no encontró la materia no hace nada
     if (head == NULL){
+        printf("La materia que solicito no existe.");
         return;
     }
 
@@ -104,7 +105,7 @@ void displayMaterias(struct NodeMateria* head){
         printf("No hay materias para mostrar\n");
     }else{
     while (temp != NULL) {
-        printf("Nombre materia: %s \n", temp->nombreMateria);
+        printf("- %s \n", temp->nombreMateria);
         temp = temp->next;
         }
     }
